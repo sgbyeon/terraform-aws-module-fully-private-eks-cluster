@@ -10,12 +10,12 @@ resource "aws_vpc_endpoint" "gateway" {
     var.private_route_tables
   ] 
 
-  tags = merge(var.tags, tomap({Name = format("%s-%s-%s-endpoint", var.prefix, var.aws_vpc.name, each.key)}))
+  tags = merge(var.tags, tomap({Name = format("%s-%s-%s-endpoint", var.prefix, var.vpc_id, each.key)}))
 }
 
 # Interface type VPC endpoint for EKS
 resource "aws_vpc_endpoint" "interface" {
-  vpc_id = aws_vpc.this.id
+  vpc_id = var.vpc_id
   for_each = toset(keys({ for k, v in var.endpoints : k => v if v == "Interface" }))
   service_name = format("com.amazonaws.%s.%s", var.region, each.key)
   private_dns_enabled = true
@@ -30,5 +30,5 @@ resource "aws_vpc_endpoint" "interface" {
     aws_security_group.vpce.id
   ]
 
-  tags = merge(var.tags, tomap({Name = format("%s-%s-%s-endpoint", var.prefix, var.vpc_name, each.key)}))
+  tags = merge(var.tags, tomap({Name = format("%s-%s-%s-endpoint", var.prefix, var.vpc_id, each.key)}))
 }
