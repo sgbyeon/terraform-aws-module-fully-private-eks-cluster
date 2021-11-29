@@ -7,7 +7,7 @@ resource "aws_vpc_endpoint" "gateway" {
   vpc_endpoint_type = var.endpoints[each.key]
 
   route_table_ids = [
-    var.private_route_tables
+    var.private_route_tables.id
   ] 
 
   tags = merge(var.tags, tomap({Name = format("%s-%s-%s-endpoint", var.prefix, var.vpc_id, each.key)}))
@@ -23,12 +23,12 @@ resource "aws_vpc_endpoint" "interface" {
   vpc_endpoint_type = var.endpoints[each.key]
 
   subnet_ids = [
-    var.private_subnet_ids
+    var.private_subnet_ids.id
   ]
 
-  security_group_ids = [
-    aws_security_group.vpce.id
-  ]
+  #security_group_ids = [
+  #  aws_security_group.vpce.id
+  #]
 
   tags = merge(var.tags, tomap({Name = format("%s-%s-%s-endpoint", var.prefix, var.vpc_id, each.key)}))
 }
