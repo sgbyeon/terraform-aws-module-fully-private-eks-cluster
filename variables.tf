@@ -25,12 +25,6 @@ variable "cluster_endpoint_private_access" {
   default = true
 }
 
-variable "cluster_public_access_cidrs" {
-  description = "List of CIDR blocks that can access the Amazon EKS public API"
-  type = list(string)
-  default = [""]
-}
-
 variable "service_ipv4_cidr" {
   description = "CIDR to assign k8s service ip"
   type = string
@@ -42,20 +36,15 @@ variable "bastion_ipv4_cidr" {
   default = [""]
 }
 
-variable "enable_eks_log_types" {
-  description = "EKS control plane logs"
-  type = list(string)
-  default = [
-    "api",
-    "audit",
-    "authenticator",
-    "controllerManager",
-    "scheduler"]
-}
-
 variable "vpc_id" {
   description = "vpc id"
   type = string
+}
+
+variable "enable_eks_log_types" {
+  description = "EKS control plane logs"
+  type = list(string)
+  default = []
 }
 
 variable "private_subnet_ids" {
