@@ -1,3 +1,15 @@
+variable "account_id" {
+  description = "List of Allowed AWS account IDs"
+  type = list(string)
+  default = [""]
+}
+
+variable "region" {
+  description = "AWS Region"
+  type = string
+  default = ""
+}
+
 variable "prefix" {
   description = "prefix for aws resources and tags"
   type = string
