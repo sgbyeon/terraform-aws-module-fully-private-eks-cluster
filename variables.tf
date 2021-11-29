@@ -41,6 +41,11 @@ variable "vpc_id" {
   type = string
 }
 
+variable "endpoints" {
+  description = "VPC endpoints"
+  type = map(string)
+}
+
 variable "enable_eks_log_types" {
   description = "EKS control plane logs"
   type = list(string)
