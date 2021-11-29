@@ -10,7 +10,7 @@ resource "aws_vpc_endpoint" "gateway" {
     var.private_route_tables
   ] 
 
-  tags = merge(var.tags, tomap({Name = format("%s-%s-%s-endpoint", var.prefix, var.vpc_name, each.key)}))
+  tags = merge(var.tags, tomap({Name = format("%s-%s-%s-endpoint", var.prefix, var.aws_vpc.name, each.key)}))
 }
 
 # Interface type VPC endpoint for EKS
