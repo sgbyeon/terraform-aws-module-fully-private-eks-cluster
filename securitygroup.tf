@@ -57,6 +57,7 @@ resource "aws_security_group_rule" "vpce" {
   from_port = 443
   to_port = 443
   protocol = "tcp"
-  cidr_blocks = [ for i in var.private_subnet_cidr : i.cidr_block ]
+  #cidr_blocks = [ for i in var.private_subnet_cidr_block : i.cidr_block ]
+  cidr_blocks = [ var.private_subnet_cidr.cidr_block ]
   security_group_id = aws_security_group.vpce.id
 }

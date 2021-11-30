@@ -70,7 +70,7 @@ variable "private_subnet_ids" {
 }
 
 variable "private_subnet_cidr" {
-  description = "private subnet cidr"
+  description = "private subnet cidr block"
   type = list(string)
 }
 
