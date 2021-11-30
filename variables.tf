@@ -69,6 +69,11 @@ variable "private_subnet_ids" {
   type = list(string)
 }
 
+variable "private_subnet_cidr" {
+  description = "private subnet cidr"
+  type = list(string)
+}
+
 variable "private_route_tables" {
   description = "private route table IDs"
   type = list(string)

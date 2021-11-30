@@ -51,3 +51,12 @@ resource "aws_security_group" "vpce" {
 
   tags = merge(var.tags, tomap({Name = format("%s-%s-vpce-sg", var.prefix, var.cluster_name)}))
 }
+
+resource "aws_security_group_rule" "vpce" {
+  type = "ingress"
+  from_port = 443
+  to_port = 443
+  protocol = "tcp"
+  cidr_blocks = [ for i in var.private_subnet_cidr : i.cidr_block ]
+  security_group_id = aws_security_group.vpce.id
+}
