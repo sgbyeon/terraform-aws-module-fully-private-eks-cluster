@@ -32,7 +32,7 @@ resource "aws_security_group_rule" "cluster_inbound_from_nodegroup" {
 
 # security group for vpc endpoint
 resource "aws_security_group" "vpce" {
-  name = format("%s-%s-vpce-sg", var.prefix, var.vpc_name)
+  name = format("%s-%s-vpce-sg", var.prefix, var.cluster_name)
   vpc_id = var.vpc_id
 
   ingress {
@@ -49,5 +49,5 @@ resource "aws_security_group" "vpce" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
-  tags = merge(var.tags, tomap({Name = format("%s-%s-vpce-sg", var.prefix, var.vpc_name)}))
+  tags = merge(var.tags, tomap({Name = format("%s-%s-vpce-sg", var.prefix, var.cluster_name)}))
 }
