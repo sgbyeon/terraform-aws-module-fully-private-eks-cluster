@@ -12,3 +12,8 @@ output "cluster_name" {
   description = "EKS cluster name"
   value = aws_eks_cluster.this.name
 }
+
+output "cluster_version" {
+  description = "EKS cluster name"
+  value = aws_eks_cluster.this.version
+}
