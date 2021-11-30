@@ -1,4 +1,4 @@
-# security group for EKS cluster and node-group
+# security group for EKS
 resource "aws_security_group" "eks_add_sg" {
   name = "${var.cluster_name}-additional-security-group"
   description = "${var.cluster_name}-additional-security-group"
@@ -33,7 +33,7 @@ resource "aws_security_group_rule" "cluster_inbound_from_nodegroup" {
 # security group for vpc endpoint
 resource "aws_security_group" "vpce" {
   name = format("%s-%s-vpce-sg", var.prefix, var.vpc_name)
-  vpc_id = aws_vpc.this.id
+  vpc_id = var.vpc_id
 
   ingress {
     protocol  = -1
