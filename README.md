@@ -223,4 +223,9 @@ output "cluster_name" {
   description = "EKS cluster name"
   value = module.cluster.cluster_name
 }
+
+output "cluster_version" {
+  description = "EKS cluster name"
+  value = module.cluster.cluster_version
+}
 ```
