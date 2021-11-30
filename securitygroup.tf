@@ -1,3 +1,4 @@
+# security group for EKS cluster and node-group
 resource "aws_security_group" "eks_add_sg" {
   name = "${var.cluster_name}-additional-security-group"
   description = "${var.cluster_name}-additional-security-group"
@@ -27,4 +28,26 @@ resource "aws_security_group_rule" "cluster_inbound_from_nodegroup" {
   to_port  = 443
   type  = "ingress"
   cidr_blocks = var.bastion_ipv4_cidr
+}
+
+# security group for vpc endpoint
+resource "aws_security_group" "vpce" {
+  name = format("%s-%s-vpce-sg", var.prefix, var.vpc_name)
+  vpc_id = aws_vpc.this.id
+
+  ingress {
+    protocol  = -1
+    self      = true
+    from_port = 0
+    to_port   = 0
+  }
+
+  egress {
+    protocol = "-1"
+    from_port = 0
+    to_port = 0
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  tags = merge(var.tags, tomap({Name = format("%s-%s-vpce-sg", var.prefix, var.vpc_name)}))
 }

@@ -22,9 +22,9 @@ resource "aws_vpc_endpoint" "interface" {
 
   subnet_ids = var.private_subnet_ids
 
-  #security_group_ids = [
-  #  aws_security_group.vpce.id
-  #]
+  security_group_ids = [
+    aws_security_group.vpce.id
+  ]
 
   tags = merge(var.tags, tomap({Name = format("%s-%s-%s-endpoint", var.prefix, var.vpc_id, each.key)}))
 }
