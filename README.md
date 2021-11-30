@@ -1,7 +1,8 @@
-# AWS VPC Terraform custom module
+# AWS Fully-private EKS Cluster Terraform custom module
 * Fully private EKS cluster 세팅 커스텀 모듈
 * EKS endpoint API 의 public 허용을 금지(보안강화)
 * Node Group은 EKS control plane에 접속하기 위해 VPC Endpoint를 사용(NAT Gateway 사용하지 않음)
+* VPC Endpoint를 생성하고 EKS Node Group의 cidr block를 vpc endpoint security group에 추가함
 
 ## Usage
 
@@ -59,7 +60,8 @@ module "cluster" {
   endpoints = var.endpoints
   vpc_id = data.aws_vpc.this.id
   private_subnet_ids = data.aws_subnet_ids.private.ids
-  private_route_tables = data.aws_route_tables.private.ids
+  private_subnet_cidr = [ for i in data.aws_subnet.private : i.cidr_block ] # vpc 엔드포인트에 접속할 EKS 노드 그룹 사설 대역, 엔드포인트 시큐리티 그룹에 룰 추가
+  private_route_tables = data.aws_route_tables.private.ids # 라우팅 테이블에 vpc 엔드포인트 룰 추가
   tags = var.tags
 }
 ```
