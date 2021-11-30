@@ -10,7 +10,7 @@
 * 모든 변수는 적절하게 변경하여 사용
 ```
 account_id = ["123456789012"] # 아이디 변경 필수, output 확인용, 실수 방지용도, 리소스에 사용하진 않음
-region = "ap-northeast-2"
+region = "ap-northeast-2" # 리전 변경 필수, output 확인용, 실수 방지용도, 리소스에 사용하진 않음
 prefix = "bsg-demo"
 cluster_name = "fully-private-eks-cluster" # 실제 클러스터 이름은 ${prefix}-${cluser_name}
 cluster_version = "1.21"
