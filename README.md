@@ -113,10 +113,11 @@ data "aws_subnet_ids" "private" {
   tags = {
     Tier = "private" # Tier 태그가 private 서브넷만 추출
   }
-  #filter {
-  #  name = "tag:Tier"
-  #  values = ["private"]
-  #}
+}
+
+data "aws_subnet" "private" {
+  for_each = data.aws_subnet_ids.private.ids # node group 서브넷 대역 추출
+  id = each.value
 }
 
 data "aws_route_tables" "private" {
@@ -125,10 +126,6 @@ data "aws_route_tables" "private" {
   tags = {
     Tier = "private" # Tier 태그가 private 서브넷만 추출
   }
-  #filter {
-  #  name = "tag:Tier"
-  #  values = ["private"]
-  #}
 }
 ```
 ---
