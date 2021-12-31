@@ -1,11 +1,11 @@
 # security group for EKS
 resource "aws_security_group" "eks_add_sg" {
-  name = "${var.prefix}.${var.cluster_name}.additional-security-group"
-  description = "${var.prefix}.${var.cluster_name}.additional-security-group"
+  name = "${var.prefix}.${var.cluster_name}.eks.additional-security-groups"
+  description = "${var.prefix}.${var.cluster_name}.eks.additional-security-group"
   vpc_id = var.vpc_id
 
   tags = merge(var.tags, tomap({
-    Name = format("%s.%s.additional-security-group", var.prefix, var.cluster_name),
+    Name = format("%s.%s.eks.additional-security-groups", var.prefix, var.cluster_name),
     "kubernetes.io/cluster/${var.cluster_name}" = "owned"
   }))
 }
