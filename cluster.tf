@@ -1,5 +1,5 @@
 resource "aws_eks_cluster" "this" {
-  name = format("%s-%s", var.prefix, var.cluster_name)
+  name = format("%s.%s.eks", var.prefix, var.cluster_name)
   version = var.cluster_version
   role_arn = aws_iam_role.this.arn
 
@@ -24,5 +24,5 @@ resource "aws_eks_cluster" "this" {
     aws_iam_role_policy_attachment.AmazonEKSVPCResourceController
   ]
 
-  tags = merge(var.tags, tomap({Name = format("%s-%s", var.prefix, var.cluster_name)}))
+  tags = merge(var.tags, tomap({Name = format("%s.%s.eks", var.prefix, var.cluster_name)}))
 }

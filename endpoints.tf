@@ -8,7 +8,7 @@ resource "aws_vpc_endpoint" "gateway" {
 
   route_table_ids = var.private_route_tables
 
-  tags = merge(var.tags, tomap({Name = format("%s-%s-%s-endpoint", var.prefix, var.vpc_id, each.key)}))
+  tags = merge(var.tags, tomap({Name = format("%s.%s.%s.endpoint", var.prefix, var.vpc_id, each.key)}))
 }
 
 # Interface type VPC endpoint for EKS
@@ -26,5 +26,5 @@ resource "aws_vpc_endpoint" "interface" {
     aws_security_group.vpce.id
   ]
 
-  tags = merge(var.tags, tomap({Name = format("%s-%s-%s-endpoint", var.prefix, var.vpc_id, each.key)}))
+  tags = merge(var.tags, tomap({Name = format("%s.%s.%s.endpoint", var.prefix, var.vpc_id, each.key)}))
 }
