@@ -1,5 +1,5 @@
 resource "aws_eks_cluster" "this" {
-  name = format("%s.%s.eks", var.prefix, var.cluster_name)
+  name = format("%s-%s-eks", var.prefix, var.cluster_name)
   version = var.cluster_version
   role_arn = aws_iam_role.this.arn
 
